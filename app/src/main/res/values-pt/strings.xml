@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Music App 2016</string>
+    <string name="str">OK</string>
+    <string name="sss">Novo album adicionado</string>
+    <string name="st">Cancel</string>
+    <string name="search">PROCURAR</string>
+    <string name="info">Informação do album</string>
+    <string name="ADD">ADD</string>
+    <string name="cancel_mess">Carreguei no cancel</string>
+    <string name="current_album">A mostrar a lista de albuns.</string>
+    <string name="Showing_all" >A mostrar todos os albuns </string>
+    <string name="All" >Tudo</string>
+    <string name="Artist" >Artista</string>
+    <string name="Album" >Album</string>
+    <string name="Year" >Ano</string>
+    <string name="Rating" >Classificação</string>
+    <string name="Searched_songs" >Musicas procuradas</string>
+    <string name="No_songs_found" >Nenhuma musica encontrada</string>
+</resources>
