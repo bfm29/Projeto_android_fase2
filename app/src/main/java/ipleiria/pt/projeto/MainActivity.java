@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         SharedPreferences sp = getSharedPreferences("appMusic", 0);
         Set<String> musicSet = sp.getStringSet("musicKey", new HashSet<String>());
-        Toast.makeText(MainActivity.this, "teste", Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, "teste1", Toast.LENGTH_SHORT).show();
 
         music = new ArrayList<String> (musicSet);
 
