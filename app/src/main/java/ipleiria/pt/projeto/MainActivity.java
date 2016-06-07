@@ -61,9 +61,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         Toast.makeText(MainActivity.this, R.string.current_album, Toast.LENGTH_SHORT).show();
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(MainActivity.this, "clicou no item" + position, Toast.LENGTH_SHORT).show();
 
                 music.remove(position);
@@ -72,7 +72,9 @@ public class MainActivity extends AppCompatActivity {
 
                 ListView listView = (ListView) findViewById(R.id.listView_music);
                 listView.setAdapter(adapter);
+            return true;
             }
+
         });
 
 
