@@ -32,7 +32,8 @@
         android:inputType="date"
         android:ems="10"
         android:id="@+id/editText_year"
-        android:hint="Ano de lançamento"/>
+        android:hint="Ano de lançamento"
+        />
 
     <RatingBar
         android:id="@+id/ratingBar"
