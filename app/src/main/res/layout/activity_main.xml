@@ -16,7 +16,6 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
-
                 android:hint="@string/info"
                 android:id="@+id/editText_search" />
 

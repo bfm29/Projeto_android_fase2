@@ -13,12 +13,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<String> music;
@@ -29,12 +33,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         SharedPreferences sp = getSharedPreferences("appMusic", 0);
         Set<String> musicSet = sp.getStringSet("musicKey", new HashSet<String>());
-        Toast.makeText(MainActivity.this, "teste", Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, ".", Toast.LENGTH_SHORT).show();
 
         music = new ArrayList<String> (musicSet);
 
  //     music.add("AC DC | High Voltage \n1975 | 4 ");
-//      music.add("AC DC | Rock or Bust \n2014 | 3 ");
+ //     music.add("AC DC | Rock or Bust \n2014 | 3 ");
  //     music.add("Knife Party | Abandon Ship \n2015 | 4 ");
  //     music.add("Toni Carreira | Vagabundo Por Amor \n2004 | 5 ");
 
@@ -60,21 +64,65 @@ public class MainActivity extends AppCompatActivity {
         s.setAdapter(adapter_s);
 
 
-        Toast.makeText(MainActivity.this, R.string.current_album, Toast.LENGTH_SHORT).show();
+
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this, "clicou no item" + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.current_album, Toast.LENGTH_SHORT).show();
+
+                AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(
+                        MainActivity.this);
+
+// Setting Dialog Title
+                alertDialog2.setTitle("Confirm Delete...");
+
+// Setting Dialog Message
+                alertDialog2.setMessage("Are you sure you want delete this file?");
+
+// Setting Icon to Dialog
+
+
+// Setting Positive "Yes" Btn
+                alertDialog2.setPositiveButton("YES",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Write your code here to execute after dialog
+                                Toast.makeText(getApplicationContext(),
+                                        "You clicked on YES", Toast.LENGTH_SHORT)
+                                        .show();
+
+                            }
+                        });
 
                 music.remove(position);
+
+// Setting Negative "NO" Btn
+                alertDialog2.setNegativeButton("NO",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Write your code here to execute after dialog
+                                Toast.makeText(getApplicationContext(),
+                                        "You clicked on NO", Toast.LENGTH_SHORT)
+                                        .show();
+                                dialog.cancel();
+                            }
+                        });
+
+// Showing Alert Dialog
+                alertDialog2.show();
+
+
 
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, music);
 
                 ListView listView = (ListView) findViewById(R.id.listView_music);
                 listView.setAdapter(adapter);
-            return true;
-            }
 
+
+                return true;
+
+
+            }
         });
 
 
@@ -166,6 +214,30 @@ public class MainActivity extends AppCompatActivity {
 
         edit.commit();
     }
+
+    private SimpleAdapter createSimpleAdapter(ArrayList<String> music) {
+        List<HashMap <String, String>> simpleAdapterData = new ArrayList<HashMap<String, String>>();
+
+        for (String m : music) {
+            HashMap<String, String> hashMap = new HashMap<>();
+
+            String[] split = m.split(" \\| ");
+
+            hashMap.put("name", split[0]);
+            hashMap.put("phone", split[1]);
+
+            simpleAdapterData.add(hashMap);
+        }
+
+        String[] from = {"name", "phone"};
+        int[] to = {R.id.textView_artist, R.id.textView_album};
+        SimpleAdapter simpleAdapter = new SimpleAdapter(getBaseContext(), simpleAdapterData, R.layout.listview, from, to);
+        return simpleAdapter;
+    }
+
+
+
+
 
     public void onClick_search(View view) {
         EditText txt = (EditText) findViewById(R.id.editText_search);
