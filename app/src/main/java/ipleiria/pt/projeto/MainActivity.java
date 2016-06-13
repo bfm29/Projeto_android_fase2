@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         SharedPreferences sp = getSharedPreferences("appMusic", 0);
         Set<String> musicSet = sp.getStringSet("musicKey", new HashSet<String>());
-        Toast.makeText(MainActivity.this, ".", Toast.LENGTH_SHORT).show();
+
 
         music = new ArrayList<String> (musicSet);
 
@@ -74,35 +74,38 @@ public class MainActivity extends AppCompatActivity {
                         MainActivity.this);
 
 // Setting Dialog Title
-                alertDialog2.setTitle("Confirm Delete...");
+                alertDialog2.setTitle("Confirmar apagar...");
 
 // Setting Dialog Message
-                alertDialog2.setMessage("Are you sure you want delete this file?");
+                alertDialog2.setMessage("Tem a certeza que quer apagar este album?");
 
 // Setting Icon to Dialog
 
 
 // Setting Positive "Yes" Btn
-                alertDialog2.setPositiveButton("YES",
+                alertDialog2.setPositiveButton("Sim",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                // Write your code here to execute after dialog
+
+
                                 Toast.makeText(getApplicationContext(),
-                                        "You clicked on YES", Toast.LENGTH_SHORT)
+                                        "Clicou no sim", Toast.LENGTH_SHORT)
                                         .show();
 
+                              //  music.remove(position);
                             }
+
                         });
 
-                music.remove(position);
 
-// Setting Negative "NO" Bt
-                alertDialog2.setNegativeButton("NO",
+
+                // Setting Negative "NO" Bt
+                alertDialog2.setNegativeButton("Não",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                // Write your code here to execute after dialog
+
                                 Toast.makeText(getApplicationContext(),
-                                        "You clicked on NO", Toast.LENGTH_SHORT)
+                                        "Clicou no não", Toast.LENGTH_SHORT)
                                         .show();
                                 dialog.cancel();
                             }
@@ -110,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
 // Showing Alert Dialog
                 alertDialog2.show();
+
 
 
 
@@ -188,8 +192,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, R.string.cancel_mess, Toast.LENGTH_SHORT).show();
             }
         });
-// Set other dialog properties
-        // ...
 
 // Create the AlertDialog
         AlertDialog dialog = builder.create();
@@ -197,7 +199,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     }
+
+
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -215,25 +221,7 @@ public class MainActivity extends AppCompatActivity {
         edit.commit();
     }
 
-    private SimpleAdapter createSimpleAdapter(ArrayList<String> music) {
-        List<HashMap <String, String>> simpleAdapterData = new ArrayList<HashMap<String, String>>();
 
-        for (String m : music) {
-            HashMap<String, String> hashMap = new HashMap<>();
-
-            String[] split = m.split(" \\| ");
-
-            hashMap.put("name", split[0]);
-            hashMap.put("phone", split[1]);
-
-            simpleAdapterData.add(hashMap);
-        }
-
-        String[] from = {"name", "phone"};
-        int[] to = {R.id.textView_artist, R.id.textView_album};
-        SimpleAdapter simpleAdapter = new SimpleAdapter(getBaseContext(), simpleAdapterData, R.layout.listview, from, to);
-        return simpleAdapter;
-    }
 
 
 
