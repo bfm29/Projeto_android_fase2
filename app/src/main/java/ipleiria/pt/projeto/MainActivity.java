@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
                 music.remove(position);
 
-// Setting Negative "NO" Btn
+// Setting Negative "NO" Bt
                 alertDialog2.setNegativeButton("NO",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
